@@ -18,25 +18,25 @@ A full-stack inventory management web application with login, a dashboard, and a
 
 ## Installation
 # Frontend
-cd frontend
-npm create vite@latest frontend -- --template react
+- cd frontend
+- npm create vite@latest frontend -- --template react
 (Eslint.config)
-npm install
-npm install react-router-dom axios
+- npm install
+- npm install react-router-dom axios
 # Backend
-cd backend
-npm init -y
-npm install express mysql2/promise bcryptjs nodemon jsonwebtoken
+- cd backend
+- npm init -y
+- npm install express mysql2/promise bcryptjs nodemon jsonwebtoken
 
 Add "start": "node index.js",
-    "dev": "nodemon index.js" to the scripts tag inside the package .json file in backend
+    "dev": "nodemon index.js" to the scripts tag inside the package.json file in backend
 
 ## Running the Application
 
 Run the backend and the frontend in two separate terminals.
 
-cd backend
-npm run dev
+- cd backend
+- npm run dev
 
-cd frontend
-npm run dev
+- cd frontend
+- npm run dev
