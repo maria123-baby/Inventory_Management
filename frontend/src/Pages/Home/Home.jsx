@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import heroImg from "./assets/home-image.png";         
-import "./index.css";
+import heroImg from "../../assets/home-image.png";         
+import "./Home.css";
 
 const UserIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">

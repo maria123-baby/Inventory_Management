@@ -1,12 +1,22 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
-import Sidebar from "./Components/Sidebar/Sidebar";
-import CreateProduct from "./Components/CreateProduct/CreateProduct";
+import Sidebar from "../../Components/Sidebar/Sidebar";
+import CreateProduct from "../../Components/CreateProduct/CreateProduct";
+import FilterDropdown from "../../Components/FilterDropDown/FilterDropDown"
 import "./Product.css";
 
 const API_URL = "http://localhost:5000/api/masters/products";
 
-// which field the dropdown searches in ("all" = every field below)
+// the fields shown as headings in the filter dropdown
+const FILTER_FIELDS = [
+  { key: "product_id", label: "Product Id" },
+  { key: "product_code", label: "Product Code" },
+  { key: "product_name", label: "Product Name" },
+  { key: "category", label: "Category" },
+  { key: "brand", label: "Brand" },
+];
+
+// the search box looks in all of these
 const SEARCH_FIELDS = [
   "product_id",
   "product_code",
@@ -21,8 +31,15 @@ function Product() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // what the user is typing / choosing (not applied yet)
+  const [searchInput, setSearchInput] = useState("");
+  const [filterInput, setFilterInput] = useState("all");
+
+  // what is applied to the table after clicking Search
   const [searchText, setSearchText] = useState("");
-  const [searchBy, setSearchBy] = useState("all"); // was undefined before
+  // "all", or "field::value" such as "category::Food"
+  const [filterValue, setFilterValue] = useState("all");
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -47,24 +64,62 @@ function Product() {
     loadProducts();
   }, [loadProducts]);
 
-  // apply the search box + dropdown to the loaded products
+  // for each field, the unique values found in the products
+  const filterGroups = useMemo(
+    () =>
+      FILTER_FIELDS.map((f) => ({
+        ...f,
+        values: [
+          ...new Set(
+            products
+              .map((p) => p[f.key])
+              .filter((v) => v !== null && v !== undefined && v !== "")
+              .map(String)
+          ),
+        ].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })),
+      })),
+    [products]
+  );
+
+  const hasFilters =
+    searchInput !== "" || filterInput !== "all" ||
+    searchText.trim() !== "" || filterValue !== "all";
+
+  // apply the typed text and chosen dropdown value (Search button / Enter key)
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchText(searchInput);
+    setFilterValue(filterInput);
+  };
+
+
+
+  // dropdown choice + search text, applied together
   const filteredProducts = useMemo(() => {
     const q = searchText.trim().toLowerCase();
-    if (!q) return products;
 
-    const fields = searchBy === "all" ? SEARCH_FIELDS : [searchBy];
-    return products.filter((p) =>
-      fields.some((f) => String(p[f] ?? "").toLowerCase().includes(q))
-    );
-  }, [products, searchText, searchBy]);
+    let field = null;
+    let value = null;
+    if (filterValue !== "all") {
+      const i = filterValue.indexOf("::");
+      field = filterValue.slice(0, i);
+      value = filterValue.slice(i + 2);
+    }
+
+    return products.filter((p) => {
+      if (field && String(p[field] ?? "") !== value) return false;
+      if (!q) return true;
+      return SEARCH_FIELDS.some((f) => String(p[f] ?? "").toLowerCase().includes(q));
+    });
+  }, [products, searchText, filterValue]);
 
   // download the currently shown (filtered) list as a CSV file
   const handleExport = () => {
     if (filteredProducts.length === 0) return;
-    const header = ["Product Id", "Product Code", "Barcode", "Product Name", "Active", "Category", "Brand"];
+    const header = ["Product Id", "Product Code", "Barcode", "Product name", "Active", "Category", "Brand"];
     const rows = filteredProducts.map((p) => [
       p.product_id, p.product_code, p.barcode || "", p.product_name,
-      p.active ? "Yes" : "No", p.category, p.brand
+      p.active ? "Yes" : "No", p.category, p.brand || "",
     ]);
     const csv = [header, ...rows]
       .map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(","))
@@ -92,30 +147,30 @@ function Product() {
           <h2 className="page-title">▣ Products</h2>
 
           {/* Search and filter */}
-          <div className="search-bar">
+          <form className="search-bar" onSubmit={handleSearch}>
             <input
               type="text"
               className="search-input"
               placeholder="Search Product..."
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
             />
-            <select
-              className="search-select"
-              value={searchBy}
-              onChange={(e) => setSearchBy(e.target.value)}
-            >
-              <option value="all">All Fields</option>
-              <option value="product_id">Product Id</option>
-              <option value="product_code">Product Code</option>
-              <option value="product_name">Product Name</option>
-              <option value="category">Category</option>
-              <option value="brand">Brand</option>
-            </select>
+
+            {/* one dropdown: each field is a heading with its values underneath */}
+            <FilterDropdown
+              groups={filterGroups}
+              value={filterInput}
+              onChange={setFilterInput}
+            />
+
+            <button type="submit" className="search-btn">
+              Search
+            </button>
+
             <span className="result-count">
               {filteredProducts.length} of {products.length}
             </span>
-          </div>
+          </form>
 
           <div className="page-actions">
             <button className="export-btn" onClick={handleExport} disabled={filteredProducts.length === 0}>
@@ -149,15 +204,15 @@ function Product() {
               </thead>
               <tbody>
                 {error && (
-                  <tr><td colSpan={6} style={{ color: "#e53935" }}>{error}</td></tr>
+                  <tr><td colSpan={7} style={{ color: "#e53935" }}>{error}</td></tr>
                 )}
 
                 {!error && !loading && products.length === 0 && (
-                  <tr><td colSpan={6}>No products yet. Click Add to create one.</td></tr>
+                  <tr><td colSpan={7}>No products yet. Click Add to create one.</td></tr>
                 )}
 
                 {!error && !loading && products.length > 0 && filteredProducts.length === 0 && (
-                  <tr><td colSpan={6}>No products match your search.</td></tr>
+                  <tr><td colSpan={7}>No products match your search or filter.</td></tr>
                 )}
 
                 {filteredProducts.map((p) => (
@@ -166,9 +221,11 @@ function Product() {
                     <td>{p.product_code}</td>
                     <td>{p.barcode || "-"}</td>
                     <td>{p.product_name}</td>
-                    <td>{p.active ? "✓" : "✗"}</td>
+                    <td> <span className={`active-box ${p.active ? "on" : ""}`}>
+                        {p.active ? "✓" : ""}
+                      </span></td>
                     <td>{p.category}</td>
-                    <td>{p.brand}</td>
+                    <td>{p.brand || "-"}</td>
                   </tr>
                 ))}
               </tbody>

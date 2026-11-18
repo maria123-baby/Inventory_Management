@@ -146,7 +146,7 @@ try {
               {field("Product name*", "productName", "")}
             </div>
             <div className="form-row">
-              {selectField("Category*", "category", ["Electronics", "Food", "Clothing", "Accessories"])}
+              {selectField("Category*", "category", ["Electronics", "Food", "Clothing", "Bags & Accessories", "Toys", "Gift Items"])}
               {selectField("Brand*", "brand", ["Hot wheels", "Nestle", "Fun World", "Gucci"])}
               {selectField("Unit of Measure*", "unit", ["Pieces", "Kg", "Box", "Liter"])}
               <button type="button" className="add-btn">+</button>

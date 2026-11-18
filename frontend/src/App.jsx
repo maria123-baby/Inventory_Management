@@ -1,6 +1,6 @@
-import Home from './Home'
-import Dashboard from './Dashboard'
-import Product from './Product'
+import Home from './Pages/Home/Home'
+import Dashboard from './Pages/Dashboard/Dashboard'
+import Product from './Pages/Product/Product'
 import ProtectedRoute from './ProtectedRoute'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 

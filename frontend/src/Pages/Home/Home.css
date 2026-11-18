@@ -9,7 +9,7 @@
   padding: 0 4.5% 0 7%;
   box-sizing: border-box;
   /* purple / orange wave image exported from Figma */
-  background: url("./assets/homebg.png") center / cover no-repeat;
+  background: url("../../assets/homebg.png") center / cover no-repeat;
 }
 
 /* ---------- Left: branding ---------- */

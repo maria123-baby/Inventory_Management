@@ -1,0 +1,97 @@
+.fd {
+  position: relative;
+  display: inline-block;
+}
+
+/* the closed dropdown button */
+.fd-button {
+  min-width: 200px;
+  height: 36px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 13px;
+  color: #222;
+  cursor: pointer;
+}
+.fd-caret {
+  font-size: 9px;
+  color: #777;
+}
+
+/* main list: All + the fields */
+.fd-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 100%;
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  z-index: 50;
+  /* no overflow here, otherwise the side list would be clipped */
+}
+
+.fd-item {
+  position: relative;            /* the side list is placed against this row */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.fd-item:hover,
+.fd-item.open {
+  background: #f4f1fa;
+}
+.fd-arrow {
+  margin-left: 24px;
+  font-size: 16px;
+  line-height: 1;
+  color: #777;
+}
+
+/* side list: values of the hovered field */
+.fd-sub {
+  position: absolute;
+  top: -6px;
+  left: 100%;
+  min-width: 180px;
+  max-height: 260px;
+  overflow-y: auto;
+  margin: 0 0 0 2px;
+  padding: 6px 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  z-index: 51;
+}
+.fd-sub-item {
+  padding: 8px 14px;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.fd-sub-item:hover {
+  background: #f4f1fa;
+}
+
+/* current choice */
+.fd-item.selected,
+.fd-sub-item.selected {
+  color: #ff6a00;
+  font-weight: 600;
+}

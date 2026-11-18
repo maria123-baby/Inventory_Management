@@ -58,7 +58,7 @@ export const createProduct = async (req, res) => {
 export const getProducts = async (req, res) => {
   try {
     const [products] = await db.query(
-      `SELECT product_id, product_code, barcode, product_name, active, category
+      `SELECT product_id, product_code, barcode, product_name, active, category, brand
        FROM products ORDER BY product_id DESC`
     );
     return res.status(200).json({ success: true, products });

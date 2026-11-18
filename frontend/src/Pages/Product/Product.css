@@ -119,8 +119,70 @@ body { margin: 0; background: #f4f4f6; color: #222; }
   font-size: 12px;
   color: #777;
 }
-/* Responsive */
+.search-btn {
+  height: 36px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 8px;
+  background: rgb(47, 47, 237);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.search-btn:hover { background:rgb(108, 108, 214) }
+/* ---------- Form checkboxes (Create Product) ---------- */
+.check-field input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-grid;
+  place-content: center;
+  width: 18px;
+  height: 18px;
+  margin: 0 6px 0 0;
+  vertical-align: middle;
+  border: 1.5px solid #bbb;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
 
+.check-field input[type="checkbox"]:checked {
+  background: #ff6a00;
+  border-color: #ff6a00;
+}
+
+.check-field input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.check-field input[type="checkbox"]:focus-visible {
+  outline: 2px solid rgba(255, 106, 0, 0.4);
+  outline-offset: 2px;
+}
+
+/* ---------- Active column (Product table) ---------- */
+.active-box {
+  display: inline-grid;
+  place-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #bbb;
+  border-radius: 4px;
+  background: #fff;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.active-box.on {
+  background: #ff6a00;
+  border-color: #ff6a00;
+}
 @media (max-width: 700px) {
   .sidebar {
     width: 120px;
