@@ -19,7 +19,8 @@ A full-stack inventory management web application with login, a dashboard, and a
 ## Installation
 # Frontend
 cd frontend
-npm create vite@latest .
+npm create vite@latest frontend -- --template react
+(Eslint.config)
 npm install
 npm install react-router-dom axios
 # Backend
