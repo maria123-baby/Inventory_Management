@@ -1,0 +1,222 @@
+/* Home / Login — scaled from the Figma "login" frame (1440 x 1024) */
+
+.home-container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr clamp(380px, 37vw, 540px);
+  align-items: center;
+  gap: 4vw;
+  padding: 0 4.5% 0 7%;
+  box-sizing: border-box;
+  /* purple / orange wave image exported from Figma */
+  background: url("./assets/homebg.png") center / cover no-repeat;
+}
+
+/* ---------- Left: branding ---------- */
+.left-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 18vh 0 3vh;
+  box-sizing: border-box;
+}
+
+
+.left-container h1{
+  font-size:50px;
+  color: hwb(248 11% 71%);
+}
+.left-container h4{
+  color:cyan;
+  font-size:25px;
+}
+.left-container h2 {
+  max-width: 12.5em;
+  margin: 0 0 14px;
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 500;
+  color: #2a1a4f;
+}
+
+.left-container p {
+  margin: 0;
+  font-size: clamp(14px, 1.4vw, 21px);
+  font-weight: 400;
+  color: #f26a1b;
+}
+
+.hero-img {
+  margin-top: auto;
+  width: min(46vw, 700px);
+  margin-left: -1%;
+}
+
+/* ---------- Right: frosted card ---------- */
+.right-container {
+  box-sizing: border-box;
+  padding: clamp(24px, 2.6vw, 40px) clamp(24px, 2.8vw, 40px) clamp(16px, 1.6vw, 24px);
+  border-radius: 24px;
+  text-align: center;
+  color: #fff;
+  background: rgba(128, 128, 128, 0.538);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.login-form h2{
+  font-size: 30px;
+  font-weight: 700;
+}
+.login-form h4 {
+  margin: 0 0 6px;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.login-sub {
+  margin: 0 0 clamp(20px, 2.4vw, 36px);
+  font-size: clamp(12px, 1.1vw, 16px);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* inputs with left icon (and eye button on the password field) */
+.input-wrap {
+  position: relative;
+  margin-bottom: 20px;
+}
+.input-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+}
+.input-wrap input {
+  width: 100%;
+  height: clamp(44px, 4vw, 58px);
+  padding: 0 52px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  background: transparent;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+.input-wrap input:focus {
+  background: rgba(255, 255, 255, 0.14);
+}
+.eye-btn {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.error-message {
+  margin: 0 0 14px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(229, 57, 53, 0.35);
+  font-size: 13px;
+}
+
+/* classes are specific so other pages' buttons are not affected */
+.login-btn {
+  width: 100%;
+  height: clamp(46px, 4.4vw, 64px);
+  margin-top: 14px;
+  border: none;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #1b1b1b;
+  font-size: clamp(15px, 1.25vw, 18px);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+.login-btn:hover {
+  background: #fff;
+}
+.login-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.help-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: clamp(22px, 2.6vw, 38px);
+  text-align: left;
+  font-size: clamp(13px, 1.1vw, 16px);
+}
+
+.footer {
+  margin-top: clamp(18px, 2vw, 28px);
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  font-size: clamp(11px, 1vw, 14px);
+}
+
+/* ---------- Tablet / mobile ---------- */
+@media (max-width: 1000px) {
+  .home-container {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 32px 20px;
+  }
+  .left-container {
+    min-height: auto;
+    padding: 0;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-img { display: none; }
+  .right-container { width: 100%; max-width: 440px; }
+}
+/*  Sidebar*/
+.side-container{
+  width:220px;
+  min-height: 100vh;
+  background: #241d4a;
+  color:white;
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap:6px;
+  font-family:"Poppins", "Segoe UI", system-ui, sans-serif;
+  font-size: 13px;
+}
+.logo{
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin: 4px 8px 22px;
+}
+.menu{
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.menu Link{
+  color:white;
+  text-decoration: none;
+}
+.dashboard-content{
+  display:flex;
+  justify-content: left;
+  margin: 0;
+}
+.left-content{
+  float: left;
+}

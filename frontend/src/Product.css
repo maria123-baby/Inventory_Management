@@ -1,0 +1,166 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+
+body { margin: 0; background: #f4f4f6; color: #222; }
+
+.product-layout { display: flex; }
+
+.product-main {
+  margin-left: 172px;          /* same as sidebar width */
+  width: calc(100% - 172px);
+  min-height: 100vh;
+}
+
+
+.masters {
+  min-height: 100vh;
+  display: flex;
+  background: #f1f1f1;
+  color: #333;
+}
+
+/* Main page */
+
+.main-content {
+  flex: 1;
+  padding: 15px 20px;
+  min-width: 0;
+  overflow: hidden;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  gap: 5px;
+}
+.topbar span {
+  color: #e86a13;
+}
+.user-info {
+  margin-left: auto;
+}
+.page-title {
+  font-size: 20px;
+  margin: 25px 0;
+}
+
+.page-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.page-actions button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+
+}
+.export-btn{
+   background: #2563eb;
+}
+.import-btn{
+   background:red;
+}
+.addProduct-btn{
+   background: orange;
+}
+.refresh-btn{
+  background:#39a94b;
+}
+.product-table {
+  margin-top: 20px;
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+  overflow-x: auto;
+}
+
+.product-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.product-table th,
+.product-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+.search-input {
+  width: 280px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.search-select {
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+}
+.result-count {
+  font-size: 12px;
+  color: #777;
+}
+/* Responsive */
+
+@media (max-width: 700px) {
+  .sidebar {
+    width: 120px;
+  }
+
+  .bottom-sections {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .preview-section {
+    grid-column: span 2;
+  }
+
+  .form-row {
+    flex-wrap: wrap;
+  }
+
+  .form-field {
+    flex-basis: 40%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    display: none;
+  }
+
+  .bottom-sections {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-section {
+    grid-column: auto;
+  }
+
+  .footer-actions {
+    flex-wrap: wrap;
+  }
+
+  .product-modal {
+    padding: 12px;
+  }
+}

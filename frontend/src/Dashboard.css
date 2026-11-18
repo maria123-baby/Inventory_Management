@@ -1,0 +1,149 @@
+* { font-family: "Inter", "Segoe UI", Arial, sans-serif; }
+
+body { margin: 0; background: #f4f4f6; color: #222; }
+
+.dash-layout { display: flex; }
+
+.dash-main {
+  margin-left: 172px;          /* same as sidebar width */
+  width: calc(100% - 172px);
+  min-height: 100vh;
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 10px 28px;
+}
+.topbar h1 { font-size: 20px; font-weight: 600; margin: 0; }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.pill {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 7px 12px;
+  background: #fff;
+  color: #777;
+  font-size: 13px;
+}
+.user { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.user small { display: block; color: #777; font-size: 11px; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; background: #c9b79c; }
+
+/* ---------- Content ---------- */
+.content { padding: 0 28px 24px; }
+
+.welcome {
+  padding: 18px 0 12px;
+  background: url("./assets/image1.png") right center / contain no-repeat; 
+}
+.welcome h2 { margin: 0; font-size: 20px; }
+.welcome p { margin: 4px 0 0; font-size: 12px; color: #444; }
+
+.grid { display: grid; gap: 12px; margin-bottom: 12px; }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-6 { grid-template-columns: repeat(6, 1fr); }
+.row-3 { grid-template-columns: 1.1fr 0.9fr 1.3fr; }
+.row-2 { grid-template-columns: 1.6fr 1fr; }
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+.card small { display: block; font-size: 10px; color: #333; }
+.card .muted { color: #888; }
+.card b { display: block; font-size: 18px; font-weight: 600; margin: 2px 0; }
+
+.stat { display: flex; align-items: center; gap: 10px; }
+.icon-box {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  color: #fff; font-size: 18px;
+  flex-shrink: 0;
+}
+
+.quick { text-align: center; }
+.quick-icon { font-size: 18px; color: #ff6a00; }
+
+/* ---------- Panels ---------- */
+.panel {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  background: #2a2140;
+  color: #fff;
+  padding: 9px 14px;
+  font-size: 13px;
+}
+.panel-head a { color: #fff; font-size: 11px; text-decoration: none; }
+
+/* Donut chart */
+.chart-body { display: flex; align-items: center; gap: 16px; padding: 14px; }
+.donut {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.donut-hole { width: 52px; height: 52px; border-radius: 50%; background: #fff; }
+.legend { list-style: none; margin: 0; padding: 0; font-size: 11px; flex: 1; }
+.legend li { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+.legend i { width: 9px; height: 9px; border-radius: 2px; }
+.legend span { flex: 1; }
+.total { margin: 0; padding: 0 14px 12px; font-size: 11px; }
+
+/* Alerts */
+.alerts { list-style: none; margin: 0; padding: 10px 14px; font-size: 12px; }
+.alerts li { display: flex; justify-content: space-between; padding: 7px 0; }
+.btn-blue {
+  display: block;
+  width: calc(100% - 28px);
+  margin: 4px 14px 14px;
+  padding: 9px;
+  border: none;
+  border-radius: 6px;
+  background: #1e5eff;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Tables */
+.table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.table th {
+  text-align: left;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-bottom: 1px solid #eee;
+}
+.table td { padding: 9px 14px; border-bottom: 1px solid #f3f3f3; }
+.red { color: #e53935; }
+
+.badge {
+  background: #d9f7e3;
+  color: #1c9c4a;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+/* Warehouse bars */
+.wh-cell { display: flex; align-items: center; gap: 8px; }
+.bar { width: 60px; height: 4px; background: #e6e6e6; border-radius: 4px; }
+.bar div { height: 100%; border-radius: 4px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1200px) {
+  .grid-5, .grid-6 { grid-template-columns: repeat(3, 1fr); }
+  .row-3, .row-2 { grid-template-columns: 1fr; }
+}
